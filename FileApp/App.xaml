@@ -1,0 +1,25 @@
+﻿<Application x:Class="FileApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModel="clr-namespace:FileApp.ViewModels"
+             xmlns:view="clr-namespace:FileApp.Views"
+             xmlns:local="clr-namespace:FileApp">
+    <Application.Resources>
+        <ResourceDictionary>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources\Style.xaml" />
+                <ResourceDictionary Source="Resources\DetailStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--<DataTemplate DataType="{x:Type viewModel:ListViewModel}">
+                <view:ListView/>
+            </DataTemplate>-->
+
+            <DataTemplate DataType="{x:Type viewModel:DetailViewModel}">
+                <view:DetailView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

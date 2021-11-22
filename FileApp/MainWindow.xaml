@@ -1,0 +1,72 @@
+﻿<RibbonWindow x:Class="FileApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileApp"
+        mc:Ignorable="d"
+        Icon="/Images/Contact.png" WindowState="Maximized"
+        Title="FileApp" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Ribbon x:Name="Ribbon" Title="" Grid.Row="0" >
+            <Ribbon.HelpPaneContent>
+                <RibbonButton Label="Help" Visibility="Collapsed"/>
+            </Ribbon.HelpPaneContent>
+            <Ribbon.QuickAccessToolBar>
+                <RibbonQuickAccessToolBar Visibility="Collapsed">
+                    <RibbonButton x:Name="QATButton1" 
+                                  Label="1" />
+                    <RibbonButton x:Name="QATButton2" 
+                                  Label="2" />
+                </RibbonQuickAccessToolBar>
+            </Ribbon.QuickAccessToolBar>
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu Visibility="Collapsed">
+                    <RibbonApplicationMenuItem Header="Hello _Ribbon"/>
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+            <RibbonTab Header="Files">
+                <RibbonGroup>
+                    <RibbonTextBox Text="{Binding Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Label="Path" TextBoxWidth="200"></RibbonTextBox>
+                    <RibbonTextBox Text="{Binding Pattern, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Label="Pattern" TextBoxWidth="200"></RibbonTextBox>
+                    <RibbonTextBox Text="{Binding Term, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Label="Term" TextBoxWidth="200"></RibbonTextBox>
+                </RibbonGroup>
+                <RibbonGroup>
+                    <RibbonButton Label="Load" Command="{Binding LoadCommand}" LargeImageSource="Images\Contact.png"/>
+                </RibbonGroup>
+                <RibbonGroup>
+                    <RibbonButton Label="Save" Command="{Binding SaveCommand}" LargeImageSource="Images\Save.png"/>
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Files">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Grid.Column="0" ItemsSource="{Binding Files}" SelectedItem="{Binding DetailView.SelectedFile, Mode=TwoWay}" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="File" Binding="{Binding File}"/>
+                            <DataGridTextColumn Header="Line" Binding="{Binding Line}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <GridSplitter Grid.Column="1"/>
+                    <ContentControl Grid.Column="2" Content="{Binding DetailView}"></ContentControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <StatusBar Grid.Row="2">
+            <StatusBarItem>
+                <TextBlock Text="{Binding Status}"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</RibbonWindow>
